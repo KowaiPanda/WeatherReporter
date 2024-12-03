@@ -59,8 +59,9 @@
           }
         } catch (error) {
           console.error('Detailed error:', error);
-          document.getElementById('info1').innerHTML = `Location Does`;
-          document.getElementById('info2').innerHTML = `Not Exist`;
+          document.getElementById('info1').textContent = `Location Does`;
+          document.getElementById('name').textContent = ``;
+          document.getElementById('info2').textContent = `Not Exist`;
         }
       }
       document.addEventListener('DOMContentLoaded', () => {
