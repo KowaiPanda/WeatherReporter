@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css">
+    <title>Weather Report</title>
+  </head>
+  <body>
+    <div class="group">
+      <div class="child">
+      <input type="text" id="city" placeholder="New York">
+      </div>
+      <div class="child">
+      <button id="get-weather-btn"><img src="images/search.png"></button>
+      </div>
+    </div>
+    <div class="text-content">
+      <div id="infobox">
+        <p id="name"></p>
+        <p id="info1"></p>
+      </div>
+      <div id="infobox">
+        <p id="info2"></p>
+      </div>
+    </div>
+    <script>
+      async function getWeatherForLocation() {
+        try {
+          const cityInput = document.getElementById('city');
+          const city = cityInput.value || 'New York';
+          const weatherData = await window.weatherService.getWeather(city);
+          const { 
+            location, 
+            temperature, 
+            description, 
+            humidity, 
+            feels_like, 
+            short_desc,
+            icon, 
+            pressure 
+          } = weatherData;
+
+          if (!location || !temperature) {
+            document.getElementById('weather-display').textContent = 
+            `Location Does Not Exist`;
+          }
+          else {
+            document.getElementById('name').innerHTML =
+              `${location}<br>`;
+            document.getElementById('info1').innerHTML = 
+              `Temperature: ${(temperature - 273.15).toFixed(1)}°C<br>` +
+              `Feels Like: ${(feels_like - 273.15).toFixed(1)}°C<br>` +
+              `${short_desc}<br>`;  
+            document.getElementById('info2').innerHTML = 
+              `Icon: ${icon}<br>` +
+              `Description: ${description}<br>` +
+              `Humidity: ${humidity}%<br>` +
+              `Pressure: ${pressure} hPa`;
+          }
+        } catch (error) {
+          console.error('Detailed error:', error);
+          document.getElementById('info1').innerHTML = `Location Does`;
+          document.getElementById('info2').innerHTML = `Not Exist`;
+        }
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        const getWeatherBtn = document.getElementById('get-weather-btn');
+        if (getWeatherBtn) {
+          getWeatherBtn.addEventListener('click', getWeatherForLocation);
+        }
+      });
+      getWeatherForLocation();
+    </script>
+  </body>
+</html>

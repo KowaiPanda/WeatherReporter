@@ -1,0 +1,3 @@
+C:\Users\Jeffery\Desktop\Folder\Files\practice\js\build\Release\obj\weatherService\weatherS.A2AD1CB7.Up2Date
+C:\Users\Jeffery\Desktop\Folder\Files\practice\js\build\Release\libcurl.dll
+C:\Users\Jeffery\Desktop\Folder\Files\practice\js\build\Release\zlib1.dll
